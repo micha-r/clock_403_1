@@ -22,6 +22,22 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+int fl = 0;
+
+struct time {
+	uint8_t seconds;
+	uint8_t minutes;
+	uint8_t hour;
+	uint8_t dayofweek;
+	uint8_t dayofmonth;
+	uint8_t month;
+	uint8_t year;
+
+	int s1, s2;
+	int m1, m2;
+	int h1, h2;
+} time;
+
 const uint8_t cif_clear = 0b11111111;
 
 const uint8_t cif[10] = { 0b10000100, 0b11110101, 0b01001100, 0b01100100, 0b00110101, 0b00100110, 0b00000110, 0b11110100, 0b00000100, 0b00100100 }; // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
@@ -53,6 +69,9 @@ uint8_t disp[6] = { 0b11111111, 0b11111111, 0b11111111, 0b11111111, 0b11111111, 
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
+
+#define DS3231_ADDRESS 0xD0
+
 #define cs_reset() HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_RESET)
 #define cs_set() HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_SET)
 #define cs_strob() cs_reset();cs_set()
